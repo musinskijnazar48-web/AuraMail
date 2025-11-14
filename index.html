@@ -15,6 +15,10 @@
             --text-light: #f5f5f7;
             --shadow-dark: rgba(0, 0, 0, 0.6);
             --blur-effect: blur(12px);
+            --google-red: #ea4335;
+            --google-blue: #4285f4;
+            --google-green: #34a853;
+            --google-yellow: #fbbc05;
         }
 
         body {
@@ -63,33 +67,13 @@
             font-size: 1.2em;
         }
 
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
+        /* --- КНОПКА GOOGLE И АНИМАЦИИ --- */
 
-        .input-group input {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            color: var(--text-light);
-            font-size: 1em;
-            box-sizing: border-box;
-        }
-
-        .input-group input:focus {
-            border-color: var(--apple-blue);
-            background: rgba(0, 122, 255, 0.1);
-            outline: none;
-        }
-
-        .login-button {
+        .google-login-button {
             width: 100%;
             padding: 15px;
-            background-color: var(--apple-blue);
-            color: var(--apple-dark);
+            background-color: var(--google-blue);
+            color: white;
             border: none;
             border-radius: 10px;
             font-weight: 700;
@@ -97,20 +81,118 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .login-button:hover {
-            background-color: #0084ff;
-            box-shadow: 0 5px 15px rgba(0, 122, 255, 0.4);
+        .google-login-button:hover {
+            background-color: #3b74db;
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.4);
             transform: translateY(-2px);
         }
+        
+        .google-login-button.loading,
+        .google-login-button.success {
+            pointer-events: none; /* Отключаем клик во время анимации */
+            color: transparent;
+            background-color: var(--apple-card);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
+        /* Анимация загрузки (спиннер) */
+        .spinner {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--google-blue);
+            animation: spin 1s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .google-login-button.loading .spinner {
+            opacity: 1;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Анимация иконки Google и галочки */
+        .icon-overlay {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .icon-google {
+            font-size: 1.5em;
+            color: var(--google-blue);
+            transform: scale(0);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .icon-success {
+            font-size: 1.5em;
+            color: var(--google-green);
+            transform: scale(0);
+            opacity: 0;
+            transition: all 0.3s ease 0.2s; /* Задержка для плавного перехода после Google */
+        }
+        
+        /* Состояние Успеха: Показываем иконку Google, скрываем спиннер, показываем галочку */
+        .google-login-button.success .spinner {
+            opacity: 0;
+        }
+        .google-login-button.success .icon-google {
+            transform: scale(1);
+            opacity: 1;
+        }
+        .google-login-button.success .icon-success {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        /* Для плавного исчезновения иконки Google перед появлением галочки */
+        .google-login-button.success.checking .icon-google {
+             transform: scale(0.5);
+             opacity: 0;
+        }
+
+        /* Общие элементы */
         .error-message {
             color: #ff3b30;
             margin-top: 15px;
             font-size: 0.9em;
             opacity: 0;
             transition: opacity 0.3s;
+        }
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 25px 0;
+            color: #8e8e93;
+        }
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .separator:not(:empty)::before {
+            margin-right: .5em;
+        }
+        .separator:not(:empty)::after {
+            margin-left: .5em;
         }
     </style>
 </head>
@@ -121,43 +203,89 @@
         </div>
         <h2>Войдите для доступа к вашему временному хранилищу</h2>
         
-        <form id="loginForm">
+        <button id="googleLoginButton" class="google-login-button">
+            <i class="fab fa-google" style="margin-right: 10px;"></i> Войти через Google
+            <div class="spinner"></div>
+            <div class="icon-overlay">
+                <i class="fab fa-google icon-google" style="position: absolute;"></i>
+                <i class="fas fa-check-circle icon-success" style="position: absolute;"></i>
+            </div>
+        </button>
+
+        <div class="separator">Или</div>
+
+        <form id="basicLoginForm">
             <div class="input-group">
-                <label for="username" style="color: #8e8e93;">Имя пользователя / Токен</label>
-                <input type="text" id="username" name="username" required placeholder="Введите любое имя">
+                <input type="text" id="username" name="username" required placeholder="Имя пользователя / Токен">
             </div>
             
             <div class="input-group">
-                <label for="password" style="color: #8e8e93;">Пароль / PIN</label>
-                <input type="password" id="password" name="password" required placeholder="Введите любой пароль">
+                <input type="password" id="password" name="password" required placeholder="Пароль / PIN">
             </div>
             
-            <button type="submit" class="login-button">
+            <button type="submit" class="google-login-button" style="background-color: var(--apple-blue);">
                 <i class="fas fa-sign-in-alt"></i> Получить доступ
             </button>
-            
-            <p id="errorMessage" class="error-message">Пожалуйста, заполните оба поля.</p>
         </form>
+        
+        <p id="errorMessage" class="error-message">Пожалуйста, заполните оба поля.</p>
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+        document.addEventListener('DOMContentLoaded', () => {
+            const googleBtn = document.getElementById('googleLoginButton');
+            const basicLoginForm = document.getElementById('basicLoginForm');
             const errorMessage = document.getElementById('errorMessage');
-            
-            if (username.trim() !== '' && password.trim() !== '') {
-                // Успешный "вход" -> перенаправление на основную страницу
-                window.location.href = 'index1.html'; 
-            } else {
-                // Показываем ошибку
-                errorMessage.style.opacity = 1;
+
+            // --- ОБРАБОТЧИК ДЛЯ КНОПКИ GOOGLE ---
+            googleBtn.addEventListener('click', function() {
+                // 1. Начинаем загрузку
+                googleBtn.classList.add('loading');
+                googleBtn.innerHTML = ''; // Скрываем текст, чтобы показать спиннер
+                
+                // 2. Имитация проверки (2 секунды)
                 setTimeout(() => {
-                    errorMessage.style.opacity = 0;
-                }, 3000);
-            }
+                    // 3. Переход в состояние "Успех"
+                    googleBtn.classList.remove('loading');
+                    googleBtn.classList.add('success');
+
+                    // 4. Показываем иконку Google
+                    const iconGoogle = googleBtn.querySelector('.icon-google');
+                    const iconSuccess = googleBtn.querySelector('.icon-success');
+
+                    // 5. После короткой паузы, показываем галочку и перенаправляем
+                    setTimeout(() => {
+                        // Плавное исчезновение иконки Google и появление галочки
+                        googleBtn.classList.add('checking'); 
+
+                        setTimeout(() => {
+                            // Перенаправление на основную страницу AuraMail
+                            window.location.href = 'auramail.html'; 
+                        }, 500); // 0.5 секунды для завершения анимации галочки
+
+                    }, 1000); // Иконка Google висит 1 секунду
+
+                }, 2000); // Общая задержка 2 секунды
+            });
+
+            // --- ОБРАБОТЧИК ДЛЯ ОСНОВНОЙ ФОРМЫ ---
+            basicLoginForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                if (username.trim() !== '' && password.trim() !== '') {
+                    // Имитация входа -> перенаправление
+                    window.location.href = 'index1.html'; 
+                } else {
+                    // Показываем ошибку
+                    errorMessage.style.opacity = 1;
+                    setTimeout(() => {
+                        errorMessage.style.opacity = 0;
+                    }, 3000);
+                }
+            });
         });
     </script>
 </body>
