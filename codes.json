@@ -1,96 +1,16 @@
 {
-  "codes": [
+  "codes": [ // Начало массива
     {
-      "code": "ZS3SNNX7",
+      "code": "Z539QWXQ",
       "expires_at": 1763118534546
-    },
+    }, // <-- Запятая, потому что есть следующий элемент
     {
-      "code": "ASLF3V49",
+      "code": "ASLF3V4S",
       "expires_at": 1763118534546
-    },
+    }, // <-- Запятая
     {
-      "code": "YE87TTQ1",
+      "code": "YE87TQ1",
       "expires_at": 1763118534546
-    },
-    {
-      "code": "AKWI6WHS",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "NYKCX1FA",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "V7N9R0RI",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "FKEPYDHC",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "JB82ZY5P",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "7YR54JFU",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "Y0AJD5LB",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "G48G0EG6",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "QGAIW6WY",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "4JNK3KB0",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "3X1LFGLD",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "9EP6CZXK",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "GULUK7Y9",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "FEH8B56O",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "PMDKX48B",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "0IILSYMI",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "QF64RXNT",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "P0XQS2P4",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "I5WGBPSM",
-      "expires_at": 1763118534546
-    },
-    {
-      "code": "N08QLO4A",
-      "expires_at": 1763118534546
-    }
-  ]
-}
+    } // <-- Запятой НЕТ, потому что это последний элемент
+  ] // Конец массива
+} // Конец корневого объекта
