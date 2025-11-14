@@ -1,93 +1,49 @@
 {
-  "codes":   [
-    {
-        "code": "YLCE9A0L",
-        "duration_hms": "01:00:00",
-        "duration_ms": 3600000,
-        "status": "pending",
-        "max_uses": 1,
-        "current_uses": 0,
-        "first_activated_at": 0
-    },
-    {
-        "code": "SEDH98ZF",
-        "duration_hms": "01:00:00",
-        "duration_ms": 3600000,
-        "status": "pending",
-        "max_uses": 1,
-        "current_uses": 0,
-        "first_activated_at": 0
-    },
-    {
-        "code": "VP0CSCRZ",
-        "duration_hms": "01:00:00",
-        "duration_ms": 3600000,
-        "status": "pending",
-        "max_uses": 1,
-        "current_uses": 0,
-        "first_activated_at": 0
-    },
-    {
-        "code": "LOHSJPKL",
-        "duration_hms": "01:00:00",
-        "duration_ms": 3600000,
-        "status": "pending",
-        "max_uses": 1,
-        "current_uses": 0,
-        "first_activated_at": 0
-    },
-    {
-        "code": "O27LIPWX",
-        "duration_hms": "01:00:00",
-        "duration_ms": 3600000,
-        "status": "active",
-        "max_uses": 1,
-        "current_uses": 0,
-        "first_activated_at": 0
-    },
-    {
-        "code": "RGV3HWFJ",
-        "duration_hms": "01:00:00",
-        "duration_ms": 3600000,
-        "status": "pending",
-        "max_uses": 1,
-        "current_uses": 0,
-        "first_activated_at": 0
-    },
-    {
-        "code": "IQL6H613",
-        "duration_hms": "01:00:00",
-        "duration_ms": 3600000,
-        "status": "pending",
-        "max_uses": 1,
-        "current_uses": 0,
-        "first_activated_at": 0
-    },
-    {
-        "code": "V0AXONMV",
-        "duration_hms": "01:00:00",
-        "duration_ms": 3600000,
-        "status": "pending",
-        "max_uses": 1,
-        "current_uses": 0,
-        "first_activated_at": 0
-    },
-    {
-        "code": "NA1Z7GG8",
-        "duration_hms": "01:00:00",
-        "duration_ms": 3600000,
-        "status": "pending",
-        "max_uses": 1,
-        "current_uses": 0,
-        "first_activated_at": 0
-    },
-    {
-        "code": "T6QON45Y",
-        "duration_hms": "01:00:00",
-        "duration_ms": 3600000,
-        "status": "pending",
-        "max_uses": 1,
-        "current_uses": 0,
-        "first_activated_at": 0
-    }
-  ]
+    "codes": [
+        {
+            "code": "C9F2H5J8",
+            "duration_hms": "168:00:00",
+            "duration_ms": 604800000,
+            "status": "active",
+            "max_uses": 1,
+            "current_uses": 0,
+            "first_activated_at": 0
+        },
+        {
+            "code": "B1D4G7K0",
+            "duration_hms": "168:00:00",
+            "duration_ms": 604800000,
+            "status": "active",
+            "max_uses": 1,
+            "current_uses": 0,
+            "first_activated_at": 0
+        },
+        {
+            "code": "M3P6R9T2",
+            "duration_hms": "168:00:00",
+            "duration_ms": 604800000,
+            "status": "active",
+            "max_uses": 1,
+            "current_uses": 0,
+            "first_activated_at": 0
+        },
+        {
+            "code": "S5V8X1Z4",
+            "duration_hms": "168:00:00",
+            "duration_ms": 604800000,
+            "status": "active",
+            "max_uses": 1,
+            "current_uses": 0,
+            "first_activated_at": 0
+        },
+        {
+            "code": "W7Y0A2C5",
+            "duration_hms": "168:00:00",
+            "duration_ms": 604800000,
+            "status": "active",
+            "max_uses": 1,
+            "current_uses": 0,
+            "first_activated_at": 0
+        }
+    ]
+}
