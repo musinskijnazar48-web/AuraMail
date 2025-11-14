@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> AuraMail | Элегантная Временная Почта</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* ==================================== */
+        /* CSS СТИЛИ - ЗАГАЛЬНІ ЗМІННІ */
+        /* ==================================== */
+        :root {
+            --apple-dark: #0a0a0a;
+            --apple-card: #1c1c1e;
+            --apple-blue: #007aff;
+            --text-light: #f5f5f7;
+            --shadow-dark: rgba(0, 0, 0, 0.6);
+            --blur-effect: blur(12px);
+            --apple-green: #4cd964;
+            --apple-light-gray: #3a3a3c;
+            --apple-system-bg: #111111; 
+            --apple-red: #ff3b30; 
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--apple-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            transition: background-color 0.5s;
+        }
+
+        /* ==================================== */
+        /* СТИЛІ - ВЕРСІЯ ПЛАНШЕТ/ДЕКСТОП */
+        /* ==================================== */
+        
+        .tablet-mode .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+        }
+
+        .tablet-mode .panel {
+            padding: 30px;
+            background: rgba(28, 28, 30, 0.6); 
+            backdrop-filter: var(--blur-effect);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 25px var(--shadow-dark);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .tablet-mode .action-buttons-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* ==================================== */
+        /* СТИЛІ - ВЕРСІЯ ТЕЛЕФОН */
+        /* ==================================== */
+
+        .phone-mode body {
+            background-color: var(--apple-system-bg);
+        }
+
+        .phone-mode .container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 10px;
+            margin: 0 auto;
+        }
+
+        .phone-mode .panel {
+            padding: 15px;
+            background: var(--apple-card); 
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .phone-mode #payment-section {
+            width: 100%;
+            padding: 15px 10px;
+            margin-top: 10px;
+        }
+        .phone-mode #payment-section .zolo1d-button {
+            width: 100%;
+        }
+        .phone-mode .action-buttons-group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 10px;
+        }
+
+        /* ==================================== */
+        /* СТИЛІ - ЗАГАЛЬНІ ЕЛЕМЕНТИ */
+        /* ==================================== */
+        
+        header {
+            text-align: center;
+            padding: 40px 0 20px 0;
+            color: var(--apple-blue);
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: var(--blur-effect);
+        }
+        .btn:hover {
+            background: rgba(0, 122, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .email-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(0, 122, 255, 0.15); 
+            border: 1px solid var(--apple-blue);
+            border-radius: 12px;
+            margin-top: 15px;
+            font-size: 1.4em;
+            font-weight: 500;
+        }
+        .copy-button {
+            background-color: var(--apple-blue);
+            color: var(--apple-dark);
+            font-weight: 700;
+            padding: 10px 15px;
+            flex-shrink: 0;
+            border: none;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            gap: 15px;
+        }
+
+        .timer {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--apple-green); 
+            padding: 8px 15px;
+            border-radius: 8px;
+            background: rgba(76, 217, 100, 0.1);
+        }
+        
+        /* ZOLO1D BUTTON STYLING */
+        #payment-section {
+            text-align: center;
+            padding: 20px 0;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        .zolo1d-button {
+            background-color: var(--apple-red);
+            color: var(--text-light);
+            font-weight: 700;
+            font-size: 1.2em;
+            padding: 15px 30px;
+            border: none;
+            box-shadow: 0 5px 15px rgba(255, 59, 48, 0.4);
+        }
+        .zolo1d-button:hover {
+            background-color: #e5382e;
+            transform: translateY(-3px);
+        }
+        
+        /* MODAL STYLES */
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background-color: rgba(0, 0, 0, 0.85);
+            display: none; justify-content: center; align-items: center; z-index: 1000;
+        }
+        .modal-content {
+            background: rgba(28, 28, 30, 0.95);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 50px var(--shadow-dark);
+            padding: 30px; border-radius: 12px; width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto;
+        }
+        #codeModal .modal-content {
+            max-width: 450px;
+        }
+        .modal-input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid var(--apple-blue);
+            background-color: var(--apple-dark);
+            color: var(--text-light);
+            font-size: 1.1em;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .modal-message {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #8e8e93;
+        }
+        
+        .modal-footer {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+        .modal-footer a {
+            color: var(--apple-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .loading-message {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.1em;
+            color: var(--apple-blue);
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="loading">
+    
+    <div id="modeSelectModal" class="modal" style="display: flex;">
+        <div class="modal-content">
+            <h2 style="border-bottom: none; margin-bottom: 10px;">Выберите режим отображения</h2>
+            <p style="color: #8e8e93;">Настройте интерфейс под ваше устройство для лучшего опыта.</p>
+            <div id="codeLoadingMessage" class="loading-message">
+                <i class="fas fa-spinner fa-spin"></i> Загрузка кодов активации...
+            </div>
+            <button class="mode-choice-btn btn" onclick="setMode('phone')" style="border-color: var(--apple-blue);" disabled id="phoneModeBtn">
+                <i class="fas fa-mobile-alt" style="margin-right: 10px;"></i> Телефон (Минималистичный)
+            </button>
+            <button class="mode-choice-btn btn" onclick="setMode('tablet')" disabled id="tabletModeBtn">
+                <i class="fas fa-tablet-alt" style="margin-right: 10px;"></i> Планшет (Apple/Футуризм)
+            </button>
+        </div>
+    </div>
+    
+    <div id="mainContent" style="display: none;">
+        <header>
+            <h1><i class="fas fa-envelope"></i> AuraMail</h1>
+            <p style="color: #8e8e93; margin-top: 10px; font-size: 1.1em; font-weight: 300;">Ваша приватная, временная почта в стиле High-Tech.</p>
+        </header>
+        
+        <section id="payment-section" class="panel">
+            <p style="color: var(--apple-green); font-weight: 600;">Получите доступ к премиум-функциям!</p>
+            <button class="zolo1d-button btn" onclick="openCodeModal(false)">
+                <i class="fas fa-coins"></i> Zolo1d - Ввести код
+            </button>
+        </section>
+    
+        <main class="container">
+            <section class="email-generator panel">
+                <h2><i class="fas fa-at" style="color: var(--apple-blue);"></i> Ваш временный адрес:</h2>
+                <div class="email-box" id="emailBox">
+                    <span id="generatedEmail">Загрузка...</span>
+                    <button class="copy-button btn" onclick="copyEmail()"><i class="fas fa-copy"></i> Копировать</button>
+                </div>
+                <div class="actions">
+                    <div class="action-buttons-group">
+                        <button class="new-email-button btn" onclick="generateNewEmail()"><i class="fas fa-redo-alt"></i> Новый адрес</button>
+                        <button class="refresh-button btn" onclick="checkInbox()"><i class="fas fa-sync-alt"></i> Обновить</button>
+                    </div>
+                    <div class="timer">
+                        <i class="fas fa-clock"></i> <span id="timerDisplay">10:00</span>
+                    </div>
+                </div>
+            </section>
+    
+            <section class="inbox panel">
+                <h2><i class="fas fa-inbox" style="color: var(--apple-blue);"></i> Входящие</h2>
+                <div class="messages" id="inboxMessages">
+                    <p class="placeholder" style="color: #636366;"><i class="fas fa-comment-dots"></i> Ожидаем входящие сообщения...</p>
+                </div>
+            </section>
+        </main>
+    
+        <footer>
+            <p style="color: #636366; font-size: 0.9em;">© 2025 AuraMail. <i class="fas fa-lock"></i> Конфиденциальность. API: Mail.tm</p>
+        </footer>
+    
+        <div id="emailModal" class="modal">
+            <div class="modal-content">
+                 <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <h3 id="modalSubject" style="margin: 0;">Тема письма</h3>
+                    <button class="modal-close" onclick="closeModal(event)" style="font-size: 1.5em; background: none; border: none; color: var(--apple-blue); cursor: pointer;">&times;</button>
+                </div>
+                <div class="modal-info" style="color: #8e8e93;">
+                    <p style="margin: 5px 0;"><strong>От:</strong> <span id="modalFrom"></span></p>
+                    <p style="margin: 5px 0;"><strong>Дата:</strong> <span id="modalDate"></span></p>
+                </div>
+                <hr style="border-color: rgba(255, 255, 255, 0.1);">
+                <div class="modal-body">
+                    <h4 style="margin-top: 20px; color: var(--apple-blue);">Содержимое (текст):</h4>
+                    <p id="modalBodyText"></p>
+                    
+                    <h4 style="margin-top: 20px; color: var(--apple-blue);">HTML (отображение):</h4>
+                    <div style="border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; overflow: hidden; height: 300px;">
+                        <iframe id="htmlFrame" style="width: 100%; height: 100%; border: none; background-color: white;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="codeModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <h3 style="margin: 0;"><i class="fas fa-key" style="color: var(--apple-red);"></i> Введите код доступа Zolo1d</h3>
+                </div>
+                
+                <input type="text" id="accessCodeInput" class="modal-input" placeholder="Введите ваш код (например, A1B2C3D4)">
+                <button class="btn copy-button" style="width: 100%;" onclick="checkAccessCode()">
+                    Проверить и активировать
+                </button>
+                
+                <p id="codeStatus" class="modal-message" style="color: var(--apple-red); font-weight: 600;">
+                    Для получения кода нажмите на кнопку ниже и следуйте инструкциям.
+                </p>
+
+                <div class="modal-footer">
+                    <p>
+                        <i class="fas fa-hand-point-right" style="color: var(--apple-blue);"></i> Шаг 1: Нажмите для оплаты и получения кода: <a href="http://t.me/send?start=IVSNisCxwTmb" target="_blank">Перейти к Zolo1d</a>
+                    </p>
+                    <p>
+                        <i class="fas fa-check" style="color: var(--apple-green);"></i> Шаг 2: Если вы оплатили, но не получили код, напишите: <a href="https://t.me/Guf1ks" target="_blank">@Guf1ks</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // JAVASCRIPT ФУНКЦИИ С ИНТЕГРАЦИЕЙ MAIL.TM API И ЛОГИКОЙ КОДОВ
+        let countdown;
+        let timeLeft = 600; 
+        let currentToken = null;
+        let currentEmailAddress = null;
+        let intervalId = null;
+        let isCodeValidated = false; 
+
+        // --- 1. Логика загрузки кодов из codes.json ---
+        let VALID_ACCESS_CODES = []; // Содержит объекты {code: "...", expires_at: ...}
+        const CODES_DATA_URL = 'codes.json'; 
+
+        async function loadAccessCodes() {
+            try {
+                const response = await fetch(CODES_DATA_URL);
+                if (!response.ok) {
+                    throw new Error(`Ошибка: Файл codes.json не найден или недоступен.`);
+                }
+                const data = await response.json();
+                
+                if (data && Array.isArray(data.codes)) {
+                    VALID_ACCESS_CODES = data.codes; 
+                    console.log(`Успешно загружено ${VALID_ACCESS_CODES.length} записей кодов.`);
+                    
+                    document.getElementById('codeLoadingMessage').textContent = '✅ Коды загружены. Выберите режим.';
+                    document.getElementById('codeLoadingMessage').style.color = 'var(--apple-green)';
+                    document.getElementById('phoneModeBtn').disabled = false;
+                    document.getElementById('tabletModeBtn').disabled = false;
+
+                } else {
+                    throw new Error("Файл codes.json имеет неверный формат.");
+                }
+            } catch (error) {
+                console.error("КРИТИЧЕСКАЯ ОШИБКА ЗАГРУЗКИ КОДОВ:", error.message);
+                document.getElementById('codeLoadingMessage').innerHTML = `<i class="fas fa-exclamation-triangle"></i> Ошибка: ${error.message}`;
+                document.getElementById('codeLoadingMessage').style.color = 'var(--apple-red)';
+                
+                document.getElementById('phoneModeBtn').disabled = false;
+                document.getElementById('tabletModeBtn').disabled = false;
+            }
+        }
+        
+        // --- 2. Логика выбора режима и принудительного открытия CodeModal ---
+        function setMode(mode) {
+            const body = document.body;
+            const mainContent = document.getElementById('mainContent');
+            const modeSelectModal = document.getElementById('modeSelectModal');
+            
+            body.classList.remove('phone-mode', 'tablet-mode', 'loading');
+
+            if (mode === 'phone') {
+                body.classList.add('phone-mode');
+            } else {
+                body.classList.add('tablet-mode');
+            }
+            
+            modeSelectModal.style.display = 'none';
+            mainContent.style.display = 'block'; 
+
+            generateNewEmail(); 
+
+            // ПРИНУДИТЕЛЬНО ОТКРЫВАЕМ МОДАЛЬНОЕ ОКНО КОДА
+            openCodeModal(true); 
+            
+            document.getElementById('emailModal').addEventListener('click', closeModal);
+        }
+        
+        // --- 3. Логика модального окна Кода и проверка истечения срока ---
+        function openCodeModal(isForced = false) {
+            if (isCodeValidated && !isForced) return;
+            
+            document.getElementById('codeModal').style.display = 'flex';
+            document.getElementById('accessCodeInput').value = ''; 
+            
+            const status = document.getElementById('codeStatus');
+            
+            if (isForced) {
+                 status.textContent = '⛔ Активация необходима для продолжения работы с сервисом.';
+                 status.style.color = 'var(--apple-red)';
+            } else {
+                 status.textContent = 'Для получения кода нажмите на кнопку ниже и следуйте инструкциям.';
+                 status.style.color = '#8e8e93';
+            }
+        }
+
+        function checkAccessCode() {
+            const input = document.getElementById('accessCodeInput');
+            const status = document.getElementById('codeStatus');
+            const enteredCode = input.value.toUpperCase().trim(); 
+            
+            // Находим соответствующий объект кода
+            const codeData = VALID_ACCESS_CODES.find(item => 
+                String(item.code).toUpperCase() === enteredCode
+            );
+
+            if (codeData) {
+                const currentTime = Date.now();
+
+                if (currentTime < codeData.expires_at) {
+                    // Код найден И не истёк
+                    status.textContent = '✅ Код принят! Доступ активирован.';
+                    status.style.color = 'var(--apple-green)';
+                    isCodeValidated = true; 
+                    
+                    setTimeout(() => document.getElementById('codeModal').style.display = 'none', 1500);
+                    
+                } else {
+                    // Код найден, НО истёк
+                    status.textContent = '❌ Код истёк. Срок действия закончился. Пожалуйста, получите новый.';
+                    status.style.color = 'var(--apple-red)';
+                    input.value = '';
+                }
+
+            } else {
+                // Код не найден
+                status.textContent = '❌ Неверный код. Попробуйте еще раз или свяжитесь с поддержкой.';
+                status.style.color = 'var(--apple-red)';
+                input.value = '';
+            }
+        }
+
+        // --- Утилитарные и API функции (частично для полноты) ---
+
+        function closeModal(event) {
+            const modal = event.target.closest('.modal');
+            
+            // Закрытие только модального окна просмотра почты
+            if (modal && modal.id === 'emailModal' && (event.target.className === 'modal' || event.target.className.includes('modal-close'))) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${String(minutes).
