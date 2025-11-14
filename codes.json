@@ -1,49 +1,16 @@
 {
-    "codes": [
-        {
-            "code": "X7Y9Z1A3",
-            "duration_hms": "24:00:00",
-            "duration_ms": 86400000,
-            "status": "blocked",
-            "max_uses": 1,
-            "current_uses": 0,
-            "first_activated_at": 0
-        },
-        {
-            "code": "W6V8U0T2",
-            "duration_hms": "24:00:00",
-            "duration_ms": 86400000,
-            "status": "active",
-            "max_uses": 1,
-            "current_uses": 0,
-            "first_activated_at": 0
-        },
-        {
-            "code": "Q5R7S9P1",
-            "duration_hms": "168:00:00",
-            "duration_ms": 604800000,
-            "status": "active",
-            "max_uses": 1,
-            "current_uses": 0,
-            "first_activated_at": 0
-        },
-        {
-            "code": "N4M6K8L0",
-            "duration_hms": "168:00:00",
-            "duration_ms": 604800000,
-            "status": "active",
-            "max_uses": 1,
-            "current_uses": 0,
-            "first_activated_at": 0
-        },
-        {
-            "code": "D0E2F4G6",
-            "duration_hms": "720:00:00",
-            "duration_ms": 2592000000,
-            "status": "active",
-            "max_uses": 1,
-            "current_uses": 0,
-            "first_activated_at": 0
-        }
-    ]
+  "codes": [
+    {
+      "code": "TESTUSER",
+      "duration_ms": 3600000,
+      "status": "active",
+      "role": "user"
+    },
+    {
+      "code": "A1B3C5D7",
+      "duration_ms": 90000000,
+      "status": "active",
+      "role": "admin" 
+    }
+  ]
 }
