@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> AuraMail | Элегантная Временная Почта</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* ==================================== */
+        /* CSS СТИЛИ */
+        /* ==================================== */
+        :root {
+            --apple-dark: #0a0a0a;
+            --apple-card: #1c1c1e;
+            --apple-blue: #007aff;
+            --text-light: #f5f5f7;
+            --shadow-dark: rgba(0, 0, 0, 0.6);
+            --blur-effect: blur(12px);
+            --apple-green: #4cd964;
+            --apple-light-gray: #3a3a3c;
+            --apple-system-bg: #111111; 
+            --apple-red: #ff3b30; 
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--apple-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            transition: background-color 0.5s;
+        }
+
+        /* Общие стили для кнопок и модальных окон */
+        .btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: var(--blur-effect);
+        }
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background-color: rgba(0, 0, 0, 0.85);
+            display: none; justify-content: center; align-items: center; z-index: 1000;
+        }
+        .modal-content {
+            background: rgba(28, 28, 30, 0.95);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 50px var(--shadow-dark);
+            padding: 30px; border-radius: 12px; width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto;
+        }
+        #codeModal .modal-content {
+            max-width: 450px;
+        }
+        .modal-input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid var(--apple-blue);
+            background-color: var(--apple-dark);
+            color: var(--text-light);
+            font-size: 1.1em;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .loading-message {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.1em;
+            color: var(--apple-blue);
+            font-weight: 500;
+        }
+        /* (Остальные стили, включая phone-mode и tablet-mode, должны быть здесь для полной визуальной функциональности) */
+    </style>
+</head>
+<body class="loading">
+    
+    <div id="modeSelectModal" class="modal" style="display: flex;">
+        <div class="modal-content">
+            <h2 style="border-bottom: none; margin-bottom: 10px;">Выберите режим отображения</h2>
+            <p style="color: #8e8e93;">Настройте интерфейс под ваше устройство для лучшего опыта.</p>
+            <div id="codeLoadingMessage" class="loading-message">
+                <i class="fas fa-spinner fa-spin"></i> Загрузка кодов активации...
+            </div>
+            <button class="mode-choice-btn btn" onclick="setMode('phone')" style="border-color: var(--apple-blue);" disabled id="phoneModeBtn">
+                <i class="fas fa-mobile-alt" style="margin-right: 10px;"></i> Телефон (Минималистичный)
+            </button>
+            <button class="mode-choice-btn btn" onclick="setMode('tablet')" disabled id="tabletModeBtn">
+                <i class="fas fa-tablet-alt" style="margin-right: 10px;"></i> Планшет (Apple/Футуризм)
+            </button>
+        </div>
+    </div>
+    
+    <div id="mainContent" style="display: none;">
+        <div id="codeModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; margin-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <h3 style="margin: 0;"><i class="fas fa-key" style="color: var(--apple-red);"></i> Введите код доступа Zolo1d</h3>
+                </div>
+                
+                <input type="text" id="accessCodeInput" class="modal-input" placeholder="Введите ваш код (например, A1B2C3D4)">
+                <button class="btn copy-button" style="width: 100%;" onclick="checkAccessCode()">
+                    Проверить и активировать
+                </button>
+                
+                <p id="codeStatus" class="modal-message" style="color: var(--apple-red); font-weight: 600;">
+                    Для получения кода нажмите на кнопку ниже и следуйте инструкциям.
+                </p>
+
+                <div class="modal-footer">
+                    <p>
+                        <i class="fas fa-hand-point-right" style="color: var(--apple-blue);"></i> Шаг 1: Нажмите для оплаты и получения кода: <a href="http://t.me/send?start=IVSNisCxwTmb" target="_blank">Перейти к Zolo1d</a>
+                    </p>
+                    <p>
+                        <i class="fas fa-check" style="color: var(--apple-green);"></i> Шаг 2: Если вы оплатили, но не получили код, напишите: <a href="https://t.me/Guf1ks" target="_blank">@Guf1ks</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+
+    <script>
+        // JAVASCRIPT ФУНКЦИИ С ИНТЕГРАЦИЕЙ MAIL.TM API И ЛОГИКОЙ КОДОВ
+        let countdown;
+        let timeLeft = 600; 
+        let currentToken = null;
+        let currentEmailAddress = null;
+        let intervalId = null;
+        let isCodeValidated = false; 
+
+        // --- 1. Логика загрузки кодов из codes.json (с Cache-Buster) ---
+        let VALID_ACCESS_CODES = []; // Содержит объекты {code: "...", expires_at: ...}
+        
+        // ДОБАВЛЯЕМ УНИКАЛЬНЫЙ ПАРАМЕТР ВРЕМЕНИ, ЧТОБЫ ОБОЙТИ КЭШ БРАУЗЕРА/GITHUB
+        const CODES_DATA_URL = 'codes.json?nocache=' + new Date().getTime(); 
+
+        async function loadAccessCodes() {
+            try {
+                // Используем путь с уникальным параметром для обхода кэша
+                const response = await fetch(CODES_DATA_URL); 
+                if (!response.ok) {
+                    throw new Error(`Ошибка: Файл codes.json не найден или недоступен.`);
+                }
+                const data = await response.json();
+                
+                if (data && Array.isArray(data.codes)) {
+                    VALID_ACCESS_CODES = data.codes; 
+                    
+                    document.getElementById('codeLoadingMessage').textContent = '✅ Коды загружены. Выберите режим.';
+                    document.getElementById('codeLoadingMessage').style.color = 'var(--apple-green)';
+                    document.getElementById('phoneModeBtn').disabled = false;
+                    document.getElementById('tabletModeBtn').disabled = false;
+
+                } else {
+                    throw new Error("Файл codes.json имеет неверный формат. Проверьте скобки { и }.");
+                }
+            } catch (error) {
+                console.error("КРИТИЧЕСКАЯ ОШИБКА ЗАГРУЗКИ КОДОВ:", error.message);
+                document.getElementById('codeLoadingMessage').innerHTML = `<i class="fas fa-exclamation-triangle"></i> Ошибка: ${error.message}`;
+                document.getElementById('codeLoadingMessage').style.color = 'var(--apple-red)';
+                
+                document.getElementById('phoneModeBtn').disabled = false;
+                document.getElementById('tabletModeBtn').disabled = false;
+            }
+        }
+        
+        // --- 2. Логика выбора режима и принудительного открытия CodeModal ---
+        function setMode(mode) {
+            // ... (основная логика установки режима) ...
+            
+            // ПРИНУДИТЕЛЬНО ОТКРЫВАЕМ МОДАЛЬНОЕ ОКНО КОДА
+            openCodeModal(true); 
+        }
+        
+        // --- 3. Логика модального окна Кода и проверка истечения срока ---
+        function openCodeModal(isForced = false) {
+            // ... (логика открытия) ...
+        }
+
+        function checkAccessCode() {
+            const input = document.getElementById('accessCodeInput');
+            const status = document.getElementById('codeStatus');
+            const enteredCode = input.value.toUpperCase().trim(); 
+            
+            const codeData = VALID_ACCESS_CODES.find(item => 
+                String(item.code).toUpperCase() === enteredCode
+            );
+
+            if (codeData) {
+                const currentTime = Date.now();
+
+                if (currentTime < codeData.expires_at) {
+                    status.textContent = '✅ Код принят! Доступ активирован.';
+                    status.style.color = 'var(--apple-green)';
+                    isCodeValidated = true; 
+                    
+                    setTimeout(() => document.getElementById('codeModal').style.display = 'none', 1500);
+                    
+                } else {
+                    status.textContent = '❌ Код истёк. Срок действия закончился. Пожалуйста, получите новый.';
+                    status.style.color = 'var(--apple-red)';
+                    input.value = '';
+                }
+
+            } else {
+                status.textContent = '❌ Неверный код. Попробуйте еще раз или свяжитесь с поддержкой.';
+                status.style.color = 'var(--apple-red)';
+                input.value = '';
+            }
+        }
+        
+        function closeModal(event) {
+            // ... (логика закрытия только emailModal) ...
+        }
+        
+        // --- (Остальные функции: formatTime, startTimer, copyEmail, API functions) ---
+        // Эти функции не были изменены и должны быть вставлены из предыдущей версии
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // ИНИЦИАЛИЗАЦИЯ: Сначала загружаем коды
+            loadAccessCodes(); 
+            // ... (остальная логика инициализации) ...
+        });
+    </script>
+</body>
+</html>
