@@ -45,5 +45,14 @@
             "current_uses": 0,
             "first_activated_at": 0
         }
+                {
+            "code": "W7Y0AS2C5",
+            "duration_hms": "168:00:00",
+            "duration_ms": 604800000,
+            "status": "active",
+            "max_uses": 1,
+            "current_uses": 0,
+            "first_activated_at": 0
+                }
     ]
 }
