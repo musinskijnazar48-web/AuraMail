@@ -4,7 +4,7 @@
             "code": "X7Y9Z1A3",
             "duration_hms": "24:00:00",
             "duration_ms": 86400000,
-            "status": "expired",
+            "status": "blocked",
             "max_uses": 1,
             "current_uses": 0,
             "first_activated_at": 0
